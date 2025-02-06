@@ -42,7 +42,7 @@ function getWeatherDescription(weatherCode: number): string {
   return "Unknown weather"
 }
 
-export function WeatherWidget() {
+export function MyV0Component() {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -108,3 +108,4 @@ export function WeatherWidget() {
   )
 }
 
+export default MyV0Component

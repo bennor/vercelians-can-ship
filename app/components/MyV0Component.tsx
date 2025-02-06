@@ -42,6 +42,10 @@ function getWeatherDescription(weatherCode: number): string {
   return "Unknown weather"
 }
 
+function celsiusToFahrenheit(celsius: number): number {
+  return (celsius * 9) / 5 + 32
+}
+
 export function MyV0Component() {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null)
   const [loading, setLoading] = useState(true)
@@ -93,6 +97,9 @@ export function MyV0Component() {
             <span className="text-7xl mb-2">{getTemperatureEmoji(weatherData.current.temperature_2m)}</span>
             <div className="flex items-center text-4xl font-medium text-zinc-800">
               <span>{Math.round(weatherData.current.temperature_2m)}°C</span>
+              <span className="text-lg text-zinc-400 ml-2">
+                ({Math.round(celsiusToFahrenheit(weatherData.current.temperature_2m))}°F)
+              </span>
             </div>
           </div>
           <div className="flex items-center text-sm text-zinc-600 mt-2">

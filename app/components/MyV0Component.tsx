@@ -42,7 +42,7 @@ function getWeatherDescription(weatherCode: number): string {
   return "Unknown weather"
 }
 
-export function MyV0Component() {
+export function WeatherWidget() {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -50,7 +50,6 @@ export function MyV0Component() {
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        // Fetching weather for Melbourne, Australia (latitude -37.81, longitude 144.96)
         const response = await fetch(
           "https://api.open-meteo.com/v1/forecast?latitude=-37.81&longitude=144.96&current=temperature_2m,weather_code",
         )
@@ -72,7 +71,7 @@ export function MyV0Component() {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-full">
-        <p className="text-white text-xl">Loading weather data...</p>
+        <p className="text-zinc-800 text-sm">Loading weather data...</p>
       </div>
     )
   }
@@ -80,26 +79,23 @@ export function MyV0Component() {
   if (error) {
     return (
       <div className="flex justify-center items-center h-full">
-        <p className="text-red-500 text-xl">{error}</p>
+        <p className="text-red-500 text-sm">{error}</p>
       </div>
     )
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-full bg-gradient-to-b from-gray-900 to-gray-800 rounded-3xl p-8 shadow-lg text-white">
-      <h2 className="text-2xl font-bold mb-6">Melbourne Weather</h2>
+    <div className="flex flex-col items-center justify-center h-full p-4">
       {weatherData && (
         <>
-          <div className="flex flex-col items-center justify-center mb-6">
-            <span className="text-9xl mb-4" style={{ textShadow: "0 0 10px rgba(255,255,255,0.5)" }}>
-              {getTemperatureEmoji(weatherData.current.temperature_2m)}
-            </span>
-            <div className="flex items-center text-6xl font-bold">
+          <div className="flex flex-col items-center justify-center">
+            <span className="text-7xl mb-2">{getTemperatureEmoji(weatherData.current.temperature_2m)}</span>
+            <div className="flex items-center text-4xl font-medium text-zinc-800">
               <span>{Math.round(weatherData.current.temperature_2m)}°C</span>
             </div>
           </div>
-          <div className="flex items-center text-3xl mb-4">
-            <span className="mr-2">{getWeatherEmoji(weatherData.current.weather_code)}</span>
+          <div className="flex items-center text-sm text-zinc-600 mt-2">
+            <span className="mr-1">{getWeatherEmoji(weatherData.current.weather_code)}</span>
             <span>{getWeatherDescription(weatherData.current.weather_code)}</span>
           </div>
         </>
@@ -108,4 +104,4 @@ export function MyV0Component() {
   )
 }
 
-export default MyV0Component
+export default WeatherWidget

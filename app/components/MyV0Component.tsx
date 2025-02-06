@@ -86,6 +86,7 @@ export function MyV0Component() {
 
   return (
     <div className="flex flex-col items-center justify-center h-full p-4">
+      <h3 className="text-sm font-medium text-zinc-500 mb-2">Melbourne</h3>
       {weatherData && (
         <>
           <div className="flex flex-col items-center justify-center">
